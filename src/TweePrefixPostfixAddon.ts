@@ -61,8 +61,8 @@ export class TweePrefixPostfixAddon implements WikifyTracerCallback, AddonPlugin
         return text;
     }
 
-    afterPassage(text: string, passageTitle: string, passageObj: SC2Passage) {
-        this._tweePrefixPostfixAddonJsCallback.afterPassage(text, passageTitle, passageObj);
+    afterPassage(text: string, passageTitle: string, passageObj: SC2Passage, node: DocumentFragment) {
+        this._tweePrefixPostfixAddonJsCallback.afterPassage(text, passageTitle, passageObj, node);
         return;
     }
 
@@ -71,8 +71,8 @@ export class TweePrefixPostfixAddon implements WikifyTracerCallback, AddonPlugin
         return text;
     }
 
-    afterWikify(text: string) {
-        this._tweePrefixPostfixAddonJsCallback.afterWikify(text);
+    afterWikify(text: string, node: DocumentFragment) {
+        this._tweePrefixPostfixAddonJsCallback.afterWikify(text, node);
         return;
     }
 
@@ -81,8 +81,8 @@ export class TweePrefixPostfixAddon implements WikifyTracerCallback, AddonPlugin
         return text;
     }
 
-    afterWidget(text: string, widgetName: string, passageTitle?: string, passageObj?: SC2Passage) {
-        this._tweePrefixPostfixAddonJsCallback.afterWidget(text, widgetName, passageTitle, passageObj);
+    afterWidget(text: string, widgetName: string, passageTitle: string | undefined, passageObj: SC2Passage | undefined, node: DocumentFragment) {
+        this._tweePrefixPostfixAddonJsCallback.afterWidget(text, widgetName, passageTitle, passageObj, node);
         return;
     }
 }

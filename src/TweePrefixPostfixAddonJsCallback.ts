@@ -18,14 +18,14 @@ export interface TweePrefixPostfixAddonCallback {
      * @return new passage inner text give the next callback OR as the final result to the wikify
      */
     beforePassage?: (text: string, passageTitle: string, passageObj: SC2Passage) => string;
-    afterPassage?: (text: string, passageTitle: string, passageObj: SC2Passage) => void;
+    afterPassage?: (text: string, passageTitle: string, passageObj: SC2Passage, node: DocumentFragment) => void;
     /**
      * return new wikify text
      * @param text
      * @return new wikify text give the next callback OR as the final result to the wikify
      */
     beforeWikify?: (text: string) => string;
-    afterWikify?: (text: string) => void;
+    afterWikify?: (text: string, node: DocumentFragment) => void;
     /**
      * return new widget text
      * @param text
@@ -35,7 +35,7 @@ export interface TweePrefixPostfixAddonCallback {
      * @return new widget inner text give the next callback OR as the final result to the wikify
      */
     beforeWidget?: (text: string, widgetName: string, passageTitle?: string, passageObj?: SC2Passage) => string;
-    afterWidget?: (text: string, widgetName: string, passageTitle?: string, passageObj?: SC2Passage) => void;
+    afterWidget?: (text: string, widgetName: string, passageTitle: string | undefined, passageObj: SC2Passage | undefined, node: DocumentFragment) => void;
 }
 
 export class TweePrefixPostfixAddonCallbackOrder {
@@ -236,7 +236,7 @@ export class TweePrefixPostfixAddonJsCallback {
         return text;
     }
 
-    afterPassage(text: string, passageTitle: string, passageObj: SC2Passage) {
+    afterPassage(text: string, passageTitle: string, passageObj: SC2Passage, node: DocumentFragment) {
         if (this.callbackCount.afterPassage === 0) {
             // short stop
             return;
@@ -244,7 +244,7 @@ export class TweePrefixPostfixAddonJsCallback {
         for (const cb of this.callbackCount.order.afterPassage) {
             if (cb.callback.afterPassage) {
                 try {
-                    cb.callback.afterPassage(text, passageTitle, passageObj);
+                    cb.callback.afterPassage(text, passageTitle, passageObj, node);
                 } catch (e: Error | any) {
                     console.error('TweePrefixPostfixAddonJsCallback.afterPassage', [cb, [text, passageTitle, passageObj], e]);
                 }
@@ -276,7 +276,7 @@ export class TweePrefixPostfixAddonJsCallback {
         return text;
     }
 
-    afterWikify(text: string) {
+    afterWikify(text: string, node: DocumentFragment) {
         if (this.callbackCount.afterWikify === 0) {
             // short stop
             return;
@@ -284,7 +284,7 @@ export class TweePrefixPostfixAddonJsCallback {
         for (const cb of this.callbackCount.order.afterWikify) {
             if (cb.callback.afterWikify) {
                 try {
-                    cb.callback.afterWikify(text);
+                    cb.callback.afterWikify(text, node);
                 } catch (e: Error | any) {
                     console.error('TweePrefixPostfixAddonJsCallback.afterWikify', [cb, [text], e]);
                 }
@@ -316,7 +316,7 @@ export class TweePrefixPostfixAddonJsCallback {
         return text;
     }
 
-    afterWidget(text: string, widgetName: string, passageTitle?: string, passageObj?: SC2Passage) {
+    afterWidget(text: string, widgetName: string, passageTitle: string | undefined, passageObj: SC2Passage | undefined, node: DocumentFragment) {
         if (this.callbackCount.afterWidget === 0) {
             // short stop
             return;
@@ -324,7 +324,7 @@ export class TweePrefixPostfixAddonJsCallback {
         for (const cb of this.callbackCount.order.afterWidget) {
             if (cb.callback.afterWidget) {
                 try {
-                    cb.callback.afterWidget(text, widgetName, passageTitle, passageObj);
+                    cb.callback.afterWidget(text, widgetName, passageTitle, passageObj, node);
                 } catch (e: Error | any) {
                     console.error('TweePrefixPostfixAddonJsCallback.afterWidget', [cb, [text, widgetName, passageTitle, passageObj], e]);
                 }
