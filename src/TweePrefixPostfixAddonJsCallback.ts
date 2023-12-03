@@ -237,6 +237,7 @@ export class TweePrefixPostfixAddonJsCallback {
     }
 
     afterPassage(text: string, passageTitle: string, passageObj: SC2Passage, node: DocumentFragment) {
+        // console.log('TweePrefixPostfixAddonJsCallback.afterPassage', [text, passageTitle, passageObj, node]);
         if (this.callbackCount.afterPassage === 0) {
             // short stop
             return;
@@ -277,6 +278,7 @@ export class TweePrefixPostfixAddonJsCallback {
     }
 
     afterWikify(text: string, node: DocumentFragment) {
+        // console.log('TweePrefixPostfixAddonJsCallback.afterWikify', [text, node]);
         if (this.callbackCount.afterWikify === 0) {
             // short stop
             return;
@@ -317,6 +319,7 @@ export class TweePrefixPostfixAddonJsCallback {
     }
 
     afterWidget(text: string, widgetName: string, passageTitle: string | undefined, passageObj: SC2Passage | undefined, node: DocumentFragment) {
+        // console.log('TweePrefixPostfixAddonJsCallback.afterWidget', [text, widgetName, passageTitle, passageObj, node]);
         if (this.callbackCount.afterWidget === 0) {
             // short stop
             return;
