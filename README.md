@@ -3,6 +3,49 @@
 
 ---
 
+this addon export :  
+`TweePrefixPostfixAddon` : `TweePrefixPostfixAddon`
+
+---
+
+```json lines
+{
+  "addonPlugin": [
+    {
+      "modName": "TweePrefixPostfixAddon",
+      "addonName": "TweePrefixPostfixAddon",
+      "modVersion": "1.0.0",
+      "params": {
+        "passage": [
+          {
+            "passageName": "passageName",
+            "pos": "front"  // "front" | "back"
+          },
+          {
+            "passageName": [
+              "passageNameA",
+              "passageNameB",
+            ],
+          }
+        ],
+        "widget": [
+          {
+            "widgetName": "widgetName",
+          },
+          {
+            "widgetName": [
+              "widgetNameA",
+              "widgetNameB",
+            ],
+          }
+        ],
+      }
+    }
+  ],
+}
+```
+
+
 
 ---
 
