@@ -20,3 +20,7 @@ label
 dist*
 
 *.zip
+
+*.modpack
+.idea/copilot.*
+
